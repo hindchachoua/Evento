@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\organizer\OrganizerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [UsersController::class, 'index'])->name('admin.user.index');
+});
+
+Route::middleware(['auth', 'role:organizer'])->group(function () {
+    Route::get('/organizer', [EventsController::class, 'index'])->name('organizer.user.index');
+
+    Route::post('/create-event', [EventsController::class, 'create'])->name('events.create');
+
 });
 
 require __DIR__.'/auth.php';
