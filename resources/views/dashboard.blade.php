@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+    
     @endrole
     @role('user')
     <div class="py-12">

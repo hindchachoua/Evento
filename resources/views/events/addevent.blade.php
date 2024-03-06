@@ -25,8 +25,9 @@
     @include('layouts.navigation')
     <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
                                 aria-labelledby="nav-ContactForm-tab">
-        <form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('events.create') }}" method="post"
+        <form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('events.store') }}" method="post"
                                     role="form">
+            @csrf
             <div style="width: 50%; height: 50%; margin-left: 25%; margin-top: 5%;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
@@ -34,7 +35,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-12">
-                        <input type="email" name="description" id="description" class="form-control" placeholder="Description" required>
+                        <input type="text" name="description" id="description" class="form-control" placeholder="Description" required>
                         </div>
                                             
                 </div>
@@ -43,10 +44,15 @@
                 <input type="text" name="location" id="location" class="form-control" placeholder="Location" required>
 
                 <input name="available_tickets" class="form-control" id="available_tickets" placeholder="Number of places"></input>
-                <select name="type" id="">
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
+                <br>
+                <input type="checkbox" name="isAuto" id="isAuto" value="0">
+                <label for="isAuto">Manulle</label>
+                <select name="category_id" id="">
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
+
 
                  <div class="col-lg-4 col-md-10 col-8 mx-auto">
                     <button type="submit" class="form-control">Add</button>

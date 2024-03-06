@@ -12,9 +12,16 @@ class bookings extends Model
     protected $fillable = [
         
         'num_people',
-        'event_id',
-        'status',
         'user_id',
         'event_id',
+        'status',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function event() {
+        return $this->belongsTo(Events::class);
+    }
 }

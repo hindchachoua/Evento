@@ -25,14 +25,17 @@
             @else
                 @role('organizer')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link style="color: rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif" :href="route('organizer.user.index')" :active="request()->routeIs('organizer.index')" >
+                        <x-nav-link style="color: rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif" :href="route('organizer.index')" :active="request()->routeIs('organizer.index')" >
                             {{ __('organizer') }}
+                        </x-nav-link>
+                        <x-nav-link style="color: rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif" :href="route('organizer.reservation')" :active="request()->routeIs('organizer.reservation')" >
+                            {{ __('Reservations') }}
                         </x-nav-link>
                     </div>
                 @else
                     @role('user')
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif" >
+                            <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif"  :href="route('user.index')" :active="request()->routeIs('user.index')">
                                 {{ __('user') }}
                             </x-nav-link>
                         </div>

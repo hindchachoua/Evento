@@ -6,17 +6,19 @@ use App\Models\events;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\categories;
 
 class EventsController extends Controller
 {
     public function index(){
-        return view('events.addevent');
+        $events = events::all();
+        return view('organizer.index', compact('events'));
     }
     public function create()
     {
         $organizer= User::where('id', Auth::user()->id)->first();
-        $events = events::all();
-        return view('events.addevent' , compact('organizer','events'));
+        $categories = categories::all();
+        return view('events.addevent' , compact('organizer','categories'));
     }
 
     public function store(Request $request){
@@ -26,6 +28,8 @@ class EventsController extends Controller
             'date' => 'required',
             'location' => 'required',
             'available_tickets' => 'required',
+            'category_id' => 'required',
+            'isAuto' => 'required',
         ]);
 
         $event = new events();
@@ -34,7 +38,9 @@ class EventsController extends Controller
         $event->date = $request->date;
         $event->location = $request->location;
         $event->available_tickets = $request->available_tickets;
-        $event->organizer_id = Auth::user()->id;
+        $event->category_id = $request->category_id;
+        $event->isAuto = $request->isAuto;
+        $event->user_id = Auth::user()->id;
         $event->save();
         return redirect('/dashboard');
     }

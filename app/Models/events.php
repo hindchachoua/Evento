@@ -10,7 +10,7 @@ class events extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tiltle',
+        'title',
         'description',
         'date',
         'location',
@@ -20,4 +20,12 @@ class events extends Model
         'category_id',
         'isvalid',
     ];
+
+    public function category(){
+        return $this->belongsTo(categories::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

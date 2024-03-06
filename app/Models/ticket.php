@@ -15,4 +15,19 @@ class ticket extends Model
         'user_id',
         'num_tickets',
     ];
+
+    public function booking()
+    {
+        return $this->belongsTo(bookings::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(events::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
