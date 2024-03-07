@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\organizer\OrganizerController;
 use App\Models\bookings;
@@ -27,6 +28,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware(['auth', 'blocked'])->group(function () {
+    
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -35,6 +42,20 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [UsersController::class, 'index'])->name('admin.user.index');
+    Route::patch('/admin/blockUser/{userId}', [UsersController::class, 'blockUser'])->name('admin.blockUser');
+    Route::get('/admin/category', [CategoriesController::class, 'index'])->name('admin.categories.index');
+    Route::get('/admin/addcategory', [CategoriesController::class, 'create'])->name('admin.categories.create');
+    Route::post('/admin/add', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('/admin/edit/{id}', [CategoriesController::class, 'edit'])->name('admin.categories.edit');
+
+    Route::put('/admin/update/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+
+    Route::delete('/admin/delete/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+    Route::get('/admin/events', [EventsController::class, 'events'] )->name('admin.events.index');
+
+    Route::put('/admin/events/valid/{id}', [EventsController::class, 'valid'])->name('admin.validEvent');
+
 });
 
 Route::middleware(['auth', 'role:organizer'])->group(function () {

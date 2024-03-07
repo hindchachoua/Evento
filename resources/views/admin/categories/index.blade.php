@@ -25,22 +25,25 @@
     @include('layouts.navigation')
 
     <div class="py-12">
+        <button class="btn" style="background-color:#6a422f; color: white; margin-left: 20px; margin-top: 20px"><a href="{{ route('admin.categories.create')}}">Add Category</a></button>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div>
-                <h1 class="text-center mt-5 mb-5" style="font-size: 50px; color: rgb(0, 0, 0); font-weight: bold">All Users:</h1>
+                <h1 class="text-center mt-5 mb-5" style="font-size: 50px; color: rgb(0, 0, 0); font-weight: bold">All Categories:</h1>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <table class="table-bordered table table-dark table-hover table-striped table-responsive w-full text-lg text-gray-500 dark:text-gray-400">
                         <tbody>
-                            @foreach($userwithuserrole as $user)
+                            @foreach($categories as $category)
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $category->name }}</td>
                                 <td>
-                                    <form action="{{ route('admin.blockUser', $user->id) }}" method="POST">
+                                    <button type="button" class="btn" style="background-color: #ee5007 ; color: white"  >
+                                        <a href="{{ route('admin.categories.edit', $category->id)}}">Edit</a>
+                                    </button>
+                                    <form action="{{ route('categories.destroy', $category->id)}}" method="POST">
                                         @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-{{ $user->is_blocked ? 'success' : 'danger' }}">
-                                            {{ $user->is_blocked ? 'Unblock' : 'Block' }}
+                                        @method('delete')
+                                        <button type="submit" class="btn" style="background-color: #ee5007 ; color: white"  >
+                                            Archive
                                         </button>
                                     </form>
                                 </td>
@@ -52,7 +55,6 @@
             </div>
         </div>
     </div>
-
 
     @include('layouts.footer')
     

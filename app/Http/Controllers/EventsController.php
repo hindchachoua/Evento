@@ -65,4 +65,17 @@ class EventsController extends Controller
         return view('user.filtre', compact('events', 'categories'));
     }
     
+    public function events(){
+
+        $events = events::all()->where('isvalid', 0);
+
+        return view('admin.events.index', compact('events'));
+    }
+
+    public function valid($id){
+        $event = events::find($id);
+        $event->isvalid = 1;
+        $event->save();
+        return redirect('/admin/events');
+    }
 }

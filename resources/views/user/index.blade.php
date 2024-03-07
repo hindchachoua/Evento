@@ -54,8 +54,9 @@
             <div class="col-lg-8 col-12 mx-auto">
                 <h2 class="text-center mb-5" style="font-size: 50px; margin-top: -50px">All Events:</h2>
             </div>
-
+            
             @foreach ($events as $event)
+            @if($event->isvalid == 1)
             <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                 <div class="pricing-thumb">
                     <div class="d-flex">
@@ -86,7 +87,12 @@
                   @endif
                 </div>
             </div>
+            @else
+            <p>No events found.</p>
+            @endif
             @endforeach
+            
+            
 
         </div>
     </div>

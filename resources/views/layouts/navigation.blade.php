@@ -19,7 +19,13 @@
                 @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
-                        {{ __('Admin') }}
+                        {{ __('Users') }}
+                    </x-nav-link>
+                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
+                        {{ __('Events') }}
                     </x-nav-link>
                 </div>
             @else
