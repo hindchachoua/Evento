@@ -25,19 +25,25 @@
     
     @include('layouts.navigation')
     <section class="schedule-section section-padding" id="section_4">
-        <button style="color: rgb(255, 255, 255);"><a href="{{ route('organizer.user.index') }}">Add Event</a></button>
+        <button class="btn" style="background-color:#ee5007; color: white"><a href="{{ route('organizer.user.index') }}">Add Event</a></button>
         <div class="container">
             <div class="row">
 
                 <div class="col-12 text-center">
-                    <h2 class="text-white mb-4">Event Schedule</h1>
+                    <h2 class="text-white mb-5" style="font-size: 60px; font-weight: bold">Your Events :</h1>
 
+                        @if($events->isempty())
+                        <div class="alert alert-danger">
+                            <p>no events</p>
+                        </div>
+                    @else
                         <div class="table-responsive">
-                            <table class="schedule-table table table-dark">
+                            <table class="schedule-table table ">
                                 @foreach ($events as $event)
+                               
                                 <thead>
                                     <tr>
-                                        <th scope="col">Date</th>
+                                        <th scope="col">Title</th>
 
                                         <th scope="col">{{ $event->date }}</th>
                                         <th>Actions</th>
@@ -47,14 +53,14 @@
 
                                 <tbody>
                                     <tr>
-                                        <th scope="row">{{ $event->title }}</th>
+                                        <th style="font-size: 20px">{{ $event->title }}</th>
 
                                         <td class="table-background-image-wrap pop-background-image">
-                                            <h3>{{ $event->location }}</h3>
+                                            <h3>Location: {{ $event->location }}</h3>
 
                                             <p class="mb-2">{{ $event->description }}</p>
 
-                                            <p>{{ $event->available_tickets }}</p>
+                                            <p>Tickets: {{ $event->available_tickets }}</p>
 
                                             <div class="section-overlay"></div>
                                         </td>
@@ -66,6 +72,7 @@
                                     </tr>
                                 </tbody>
                                 @endforeach
+                                @endif
                             </table>
                         </div>
                 </div>

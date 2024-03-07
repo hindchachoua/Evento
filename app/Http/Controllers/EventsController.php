@@ -11,7 +11,8 @@ use App\Models\categories;
 class EventsController extends Controller
 {
     public function index(){
-        $events = events::all();
+        $events = events::all()->where('user_id', Auth::user()->id);
+
         return view('organizer.index', compact('events'));
     }
     public function create()
@@ -29,7 +30,7 @@ class EventsController extends Controller
             'location' => 'required',
             'available_tickets' => 'required',
             'category_id' => 'required',
-            'isAuto' => 'required',
+            
         ]);
 
         $event = new events();
@@ -39,9 +40,29 @@ class EventsController extends Controller
         $event->location = $request->location;
         $event->available_tickets = $request->available_tickets;
         $event->category_id = $request->category_id;
-        $event->isAuto = $request->isAuto;
         $event->user_id = Auth::user()->id;
         $event->save();
         return redirect('/dashboard');
     }
+
+    public function filtre(Request $request){
+        $categories = categories::all();
+        
+        $query = events::query();
+    
+        
+        if ($request->has('category')) {
+            $query->where('category_id', $request->category);
+        }
+    
+        
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+    
+        $events = $query->get();
+    
+        return view('user.filtre', compact('events', 'categories'));
+    }
+    
 }

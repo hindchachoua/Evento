@@ -22,36 +22,22 @@
 
 </head>
 <body>
-    
     @include('layouts.navigation')
 
-    
-    @foreach ($bookings as $item)
-    @if($item->isValid == 0)
-    <p>Event Title: {{ $item->title }}</p>
-    <p>Event Description: {{ $item->description }}</p>
-    <p>Event Date: {{ $item->date }}</p>
-    <p>Status: {{ $item->isValid }}</p>
-    <p>Reserved by: {{ $item->user_name }}</p>
-    
-    <form action="{{ route('bookings.accept', ['booking' => $item->id])}}" method="POST">
-    @csrf
-    @method('patch')
-    <button type="submit" class="btn btn-success">Accept</button>
-    </form>
+   
+    <h1>Ticket Details</h1>
 
-    <hr>
-    @else
-    <div class="alert alert-denger">
+    <p>Event Title: {{ $event->title }}</p>
+    <p>Event Date: {{ $event->date }}</p>
+    <p>Number of People: {{ $event->num_people }}</p>
+    {{-- Add more details as needed --}}
 
-        <p>no Reservations</p>
-    </div>
-    @endif
-@endforeach
+    <a href="{{ route('user.index') }}" class="btn btn-primary">Back to Events</a>
+
 
 
     @include('layouts.footer')
-        
+    
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

@@ -1,12 +1,12 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class=" dark:bg-black border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                        Evento Live
                     </a>
                 </div>
 
@@ -25,19 +25,22 @@
             @else
                 @role('organizer')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link style="color: rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif" :href="route('organizer.index')" :active="request()->routeIs('organizer.index')" >
+                        <x-nav-link style="color: rgb(229, 53, 0); font-family: 'Times New Roman', Times, serif" :href="route('organizer.index')" :active="request()->routeIs('organizer.index')" >
                             {{ __('organizer') }}
                         </x-nav-link>
-                        <x-nav-link style="color: rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif" :href="route('organizer.reservation')" :active="request()->routeIs('organizer.reservation')" >
+                        <x-nav-link style="color: rgb(197, 46, 0); font-family: 'Times New Roman', Times, serif" :href="route('organizer.reservation')" :active="request()->routeIs('organizer.reservation')" >
                             {{ __('Reservations') }}
                         </x-nav-link>
                     </div>
                 @else
                     @role('user')
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif"  :href="route('user.index')" :active="request()->routeIs('user.index')">
-                                {{ __('user') }}
+                            <x-nav-link style="color: rgb(255, 60, 0); font-weight:bold; font-size: 1rem;"  :href="route('user.index')" :active="request()->routeIs('user.index')">
+                                {{ __('All events') }}
                             </x-nav-link>
+                            {{-- <x-nav-link style="color: rgb(197, 46, 0); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif" >
+                                {{ __('tickets') }}
+                            </x-nav-link> --}}
                         </div>
                         
                     @endrole
@@ -49,7 +52,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-white bg-orange-500  hover:text-white dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -61,7 +64,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" style="color:#ee5007;">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -71,13 +74,14 @@
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();" style="color:#ee5007;">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
             </div>
+            
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">

@@ -42,12 +42,17 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
     Route::get('/reservations', [BookingsController::class, 'reservations'])->name('organizer.reservation');
     Route::get('/organizer', [EventsController::class, 'create'])->name('organizer.user.index');
     Route::post('/create-event', [EventsController::class, 'store'])->name('events.store');
+    Route::patch('/accept/{booking}', [BookingsController::class, 'accept'])->name('bookings.accept');
+
 
 });
 
 Route::middleware(['auth' , 'role:user'])->group(function () {
     Route::get('/user', [BookingsController::class, 'index'])->name('user.index');
-    Route::post('/user/reserve/{events}', [BookingsController::class, 'reserve'])->name('user.reserve');
+    Route::post('/user/reserve/{event}', [BookingsController::class, 'reserve'])->name('user.reserve');
+
+    Route::post('/filtrage', [EventsController::class, 'filtre'])->name('events.filtre');
+
 });
 
 require __DIR__.'/auth.php';

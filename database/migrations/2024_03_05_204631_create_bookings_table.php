@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'canceled'])->default('active');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->boolean('isValid')->default(0);
             $table->timestamps();
         });
     }

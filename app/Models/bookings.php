@@ -15,6 +15,7 @@ class bookings extends Model
         'user_id',
         'event_id',
         'status',
+        'isValid',
     ];
 
     public function user() {

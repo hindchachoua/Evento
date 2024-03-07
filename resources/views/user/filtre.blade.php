@@ -24,39 +24,22 @@
 <body>
     @include('layouts.navigation')
 
-<div class="container">
-    <div class="text-center mb-5 mt-5">
-      <p class="alert alert-info">Book Your Event now :)</p>
+    <button class="btn" style="background-color:#ee5007; color: white" ><a href="{{ route('user.index') }}">Back-></a></button>
+
+    <h1 style="font-size: 50px" class="text-center mt-5 mb-3">Result:</h1>
+
+
+
+    @if ($events->isEmpty())
+
+    <div class="card">
+        <div class="card-body mt-5 mb-5">
+            <p class="alert alert-info text-center">No Events added yet.</p>
+        </div>
     </div>
-
-    <form action="{{ route('events.filtre') }}" method="POST">
-      @csrf
-      <label for="category" style="font-weight: bold">Category:</label>
-      <select name="category" id="category">
-          @foreach($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-      </select>
-
-      <label for="search" style="font-weight: bold">Search by Title:</label>
-    <input type="text" name="search" id="search">
-
-      <button type="submit" class="btn" style="background-color:#ee5007; color: white">Filtre</button>
-  </form>
-    
-
-  </div>
-
-  <section class="pricing-section section-padding section-bg" id="section_5">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="text-center mb-5" style="font-size: 50px; margin-top: -50px">All Events:</h2>
-            </div>
-
-            @foreach ($events as $event)
-            <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+    @else
+    @foreach ($events as $event)
+            <div class="col-lg-6 col-12 mt-4 mt-lg-0" style="margin-left: 25%; margin-bottom: 2%;" >
                 <div class="pricing-thumb">
                     <div class="d-flex">
                         <div >
@@ -87,11 +70,8 @@
                 </div>
             </div>
             @endforeach
+    @endif
 
-        </div>
-    </div>
-</section>
-    
     @include('layouts.footer')
     
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
