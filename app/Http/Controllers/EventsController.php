@@ -40,6 +40,8 @@ class EventsController extends Controller
         $event->location = $request->location;
         $event->available_tickets = $request->available_tickets;
         $event->category_id = $request->category_id;
+        $event->isAuto = $request->isAuto;
+        $event->isAuto = $request->has('isAuto') ? 1 : 0;
         $event->user_id = Auth::user()->id;
         $event->save();
         return redirect('/dashboard');
@@ -77,5 +79,51 @@ class EventsController extends Controller
         $event->isvalid = 1;
         $event->save();
         return redirect('/admin/events');
+    }
+
+
+    public function edit($id){
+        $categories = categories::all();
+        $event = events::find($id);
+        return view('events.edit', compact('event', 'categories'));
+    }
+
+
+    public function update(Request $request, $id)
+{
+    
+    $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'date' => 'required',
+        'location' => 'required',
+        'available_tickets' => 'required',
+        'category_id' => 'required',
+    ]);
+
+    $event = events::find($id);
+    $event->title = $request->title;
+    $event->description = $request->description;
+    $event->date = $request->date;
+    $event->location = $request->location;
+    $event->available_tickets = $request->available_tickets;
+    $event->category_id = $request->category_id;
+    $event->isAuto = $request->has('isAuto') ? 1 : 0;
+    $event->user_id = Auth::user()->id;
+    $event->save();
+
+    return redirect('/or');
+}
+
+    public function destroy($id){
+        $event = events::find($id);
+        $event->delete();
+        return redirect('/or');
+    }
+
+
+    public function show($id){
+        $event = events::find($id);
+        return view('user.show', compact('event'));
     }
 }

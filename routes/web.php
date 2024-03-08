@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\organizer\OrganizerController;
+use App\Http\Controllers\StatisticController;
 use App\Models\bookings;
 
 /*
@@ -56,6 +58,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::put('/admin/events/valid/{id}', [EventsController::class, 'valid'])->name('admin.validEvent');
 
+    Route::get('/admin/statistics', [StatisticController::class, 'index'])->name('admin.admin');
 });
 
 Route::middleware(['auth', 'role:organizer'])->group(function () {
@@ -65,6 +68,12 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
     Route::post('/create-event', [EventsController::class, 'store'])->name('events.store');
     Route::patch('/accept/{booking}', [BookingsController::class, 'accept'])->name('bookings.accept');
 
+    Route::get('/organizer/edit/{id}', [EventsController::class, 'edit'])->name('organizer.events.edit');
+    Route::patch('/organizer/update/{id}', [EventsController::class, 'update'])->name('organizer.events.update');
+
+    Route::delete('/organizer/delete/{id}', [EventsController::class, 'destroy'])->name('events.destroy');
+
+    Route::get('/organizer/statistics', [StatisticController::class, 'statist'])->name('organizer.statistics');
 
 });
 
@@ -74,6 +83,14 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
     Route::post('/filtrage', [EventsController::class, 'filtre'])->name('events.filtre');
 
+    Route::get('/user/myreservations' , [BookingsController::class, 'history'])->name('user.myhistory');
+
+    Route::get('/user/myreservation', [BookingsController::class, 'myreservation'])->name('user.reservation');
+
+    Route::put('/user/cancel/{booking}', [BookingsController::class, 'cancelreservation'])->name('bookings.cancel');
+
+    Route::get('/user/reservation/{id}', [EventsController::class, 'show'])->name('user.show');
+    
 });
 
 require __DIR__.'/auth.php';

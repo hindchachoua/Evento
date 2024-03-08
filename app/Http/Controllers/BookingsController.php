@@ -63,7 +63,16 @@ class BookingsController extends Controller
 
     public function reservations()
     {
-        $bookings = bookings::join('events', 'bookings.event_id', '=', 'events.id')->where('events.isAuto', 0)
+        // Assuming you have an authenticated user
+        $user = Auth::user();
+    
+        // Retrieve the events associated with the organizer
+        $organizerEvents = events::where('user_id', $user->id)->pluck('id');
+    
+        // Retrieve bookings for the organizer's events
+        $bookings = bookings::join('events', 'bookings.event_id', '=', 'events.id')
+            ->where('events.isAuto', 0)
+            ->whereIn('events.id', $organizerEvents)
             ->join('users', 'bookings.user_id', '=', 'users.id')
             ->select('bookings.*', 'events.title', 'events.description', 'events.date', 'users.name as user_name')
             ->get();
@@ -78,5 +87,40 @@ class BookingsController extends Controller
         $event->save();
         return redirect('/reservations');
     }
+
+
+    public function history(){
+        $bookings = bookings::join('events', 'bookings.event_id', '=', 'events.id')->where('bookings.user_id', Auth::user()->id)
+            ->join('users', 'bookings.user_id', '=', 'users.id')
+            ->select('bookings.*', 'events.title', 'events.description', 'events.date', 'events.location', 'users.name as user_name')
+            ->get();
+    
+        return view('user.myhistory', compact('bookings'));
     }
+
+    public function myreservation(){
+        $bookings = bookings::join('events', 'bookings.event_id', '=', 'events.id')->where('bookings.user_id', Auth::user()->id)
+        ->select('bookings.*', 'events.title', 'events.description', 'events.date', 'events.location')
+        ->get();
+        return view('user.reservation', compact('bookings'));
+    }
+
+    public function cancelReservation(Bookings $booking, Request $request) {
+
+        $reservation = bookings::find($booking->reserv_id);
+    
+        if ($reservation) {
+            
+            $reservation->available_seats++;
+    
+            
+            $reservation->save();
+        }
+    
+        $booking->status = $request->input('status');
+        $booking->save();
+    
+        return redirect()->route('user.index')->with('success', 'User status updated successfully');
+    }
+}
 

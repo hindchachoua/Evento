@@ -64,8 +64,12 @@
 
                                             <div class="section-overlay"></div>
                                         </td>
-                                        <th><a href="">Edit</a>
-                                            <a href="">Delete</a>
+                                        <th><a href="{{ route('organizer.events.edit', $event->id)}}">Edit</a>
+                                            <form action="{{ route('events.destroy', $event->id)}}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" style="background: none; border: none; color: red; cursor: pointer;">Delete</button>
+                                            </form>
                                         </th>
 
                                        

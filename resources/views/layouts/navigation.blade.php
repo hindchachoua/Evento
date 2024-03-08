@@ -27,15 +27,22 @@
                     <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
                         {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.admin')" :active="request()->routeIs('admin.admin')">
+                        {{ __('statistics') }}
+                    </x-nav-link>
                 </div>
             @else
                 @role('organizer')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link style="color: rgb(229, 53, 0); font-family: 'Times New Roman', Times, serif" :href="route('organizer.index')" :active="request()->routeIs('organizer.index')" >
-                            {{ __('organizer') }}
+                        <x-nav-link style="color: rgb(229, 53, 0); " :href="route('organizer.index')" :active="request()->routeIs('organizer.index')" >
+                            {{ __('Events') }}
                         </x-nav-link>
-                        <x-nav-link style="color: rgb(197, 46, 0); font-family: 'Times New Roman', Times, serif" :href="route('organizer.reservation')" :active="request()->routeIs('organizer.reservation')" >
+                        <x-nav-link style="color: rgb(255, 255, 255);" :href="route('organizer.reservation')" :active="request()->routeIs('organizer.reservation')" >
                             {{ __('Reservations') }}
+                        </x-nav-link>
+
+                        <x-nav-link style="color: rgb(255, 255, 255);" :href="route('organizer.statistics')" :active="request()->routeIs('organizer.statistics')" >
+                            {{ __('Statistics') }}
                         </x-nav-link>
                     </div>
                 @else
@@ -47,6 +54,13 @@
                             {{-- <x-nav-link style="color: rgb(197, 46, 0); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif" >
                                 {{ __('tickets') }}
                             </x-nav-link> --}}
+                            <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;"  :href="route('user.myhistory')" :active="request()->routeIs('user.myhistory')">
+                                {{ __('My history') }}
+                            </x-nav-link>
+
+                            <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;"  :href="route('user.reservation')" :active="request()->routeIs('user.reservation')">
+                                {{ __('My reservations') }}
+                            </x-nav-link>
                         </div>
                         
                     @endrole

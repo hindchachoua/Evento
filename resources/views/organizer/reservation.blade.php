@@ -25,30 +25,34 @@
     
     @include('layouts.navigation')
 
+    <div class="container text-center" style="width: 50%" >
+        <h1 class="text-center mt-5 mb-5" style="font-size: 50px; color: rgb(0, 0, 0); font-weight: bold">Reservations :</h1>
     
-    @foreach ($bookings as $item)
-    @if($item->isValid == 0)
-    <p>Event Title: {{ $item->title }}</p>
-    <p>Event Description: {{ $item->description }}</p>
-    <p>Event Date: {{ $item->date }}</p>
-    <p>Status: {{ $item->isValid }}</p>
-    <p>Reserved by: {{ $item->user_name }}</p>
-    
-    <form action="{{ route('bookings.accept', ['booking' => $item->id])}}" method="POST">
-    @csrf
-    @method('patch')
-    <button type="submit" class="btn btn-success">Accept</button>
-    </form>
-
-    <hr>
-    @else
-    <div class="alert alert-denger">
-
-        <p>no Reservations</p>
+        @forelse ($bookings as $item)
+            @if($item->isValid == 0)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Event Title: {{ $item->title }}</h5>
+                        <p class="card-text">Event Description: {{ $item->description }}</p>
+                        <p class="card-text">Event Date: {{ $item->date }}</p>
+                        <p class="card-text">Validation: {{ $item->isValid }}</p>
+                        <p class="card-text">Reserved by: {{ $item->user_name }}</p>
+                        
+                        <form action="{{ route('bookings.accept', ['booking' => $item->id]) }}" method="POST">
+                            @csrf
+                            @method('patch')
+                            <button type="submit" class="btn btn-success" style="background-color: #6a422f">Accept</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
+        @empty
+            <div class="alert alert-danger" style="margin-top: 5%; margin-bottom: 5%;">
+                <p>No Reservations</p>
+            </div>
+        @endforelse
     </div>
-    @endif
-@endforeach
-
+    
 
     @include('layouts.footer')
         

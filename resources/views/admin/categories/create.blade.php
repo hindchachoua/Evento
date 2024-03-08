@@ -26,10 +26,11 @@
 
     <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
     aria-labelledby="nav-ContactForm-tab">
-<form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('categories.store') }}" method="post"
+<form class="custom-form contact-form mb-5 mb-lg-0"  style="margin-top: 15%;" action="{{ route('categories.store') }}" method="post"
         role="form">
 @csrf
-<div style="width: 50%; height: 50%; margin-left: 25%; margin-top: 5%;">
+<h1 class="text-center  mb-5" style="font-size: 50px; color: rgb(0, 0, 0); font-weight: bold; margin-top: -5%;">Add Categories:</h1>
+<div style="width: 50%; height: 50%; margin-left: 25%; margin-bottom: 5%;">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-12">
 <input type="text" name="name_category" id="name_category" class="form-control" placeholder="Name of category" required>
@@ -40,6 +41,7 @@
 
 <div class="col-lg-4 col-md-10 col-8 mx-auto">
 <button type="submit" class="form-control">Add</button>
+</div>
 </div>
 </div>
 </form>

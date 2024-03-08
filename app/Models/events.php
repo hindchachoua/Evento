@@ -30,6 +30,6 @@ class events extends Model
     }
 
     public function bookings(){
-        return $this->hasMany(bookings::class);
+        return $this->hasMany(bookings::class , 'event_id');
     }
 }

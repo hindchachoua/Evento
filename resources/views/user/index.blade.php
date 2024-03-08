@@ -55,13 +55,14 @@
                 <h2 class="text-center mb-5" style="font-size: 50px; margin-top: -50px">All Events:</h2>
             </div>
             
-            @foreach ($events as $event)
-            @if($event->isvalid == 1)
+            @if ($events->where('isvalid', 1)->count() > 0)
+                @foreach ($events as $event)
+                    @if ($event->isvalid == 1)
             <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                 <div class="pricing-thumb">
                     <div class="d-flex">
                         <div >
-                            <h3 style="font-size: 28px; margin-top: -20px" >{{ $event->title}}</h3>
+                            <h3 style="font-size: 28px; margin-top: -20px" ><a href="{{ route('user.show', $event->id)}}">{{ $event->title}}</a></h3>
 
                             <p><span style="font-weight: bold">Category:</span> {{ $event->category->name}}</p>
                         </div>
@@ -69,7 +70,7 @@
 
                     <ul class="pricing-list mt-3">
 
-                        <li class="pricing-list-item">{{ $event->description}}</li>
+                        <li class="pricing-list-item">{{ Str::limit($event->description, 10)}}</li>
                         <span class="badge bg-success">{{ $event->date}}</span>
                         <p>available_tickets: <span class="badge bg-secondary">{{ $event->available_tickets}}</span></p>
                     </ul>
@@ -87,10 +88,13 @@
                   @endif
                 </div>
             </div>
-            @else
-            <p>No events found.</p>
             @endif
-            @endforeach
+                @endforeach
+            @else
+            <div class="alert alert-info text-center mt-5 mb-5 p-5 shadow bg-white rounded col-lg-8 col-16 ml-auto mr-auto">
+                <p>No events found.</p>
+            </div>
+            @endif
             
             
 
