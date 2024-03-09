@@ -55,8 +55,8 @@ class BookingsController extends Controller
         $events->available_tickets -= $decrementValue;
         $events->save();
     }
-
-        return redirect('/user');
+         $reservationId = bookings::latest()->first()->id;
+         return redirect()->route('simple-qrcode', $reservationId);
     }
 
 
@@ -120,7 +120,7 @@ class BookingsController extends Controller
         $booking->status = $request->input('status');
         $booking->save();
     
-        return redirect()->route('user.index')->with('success', 'User status updated successfully');
+        return redirect()->route('user.reservation')->with('success', 'User status updated successfully');
     }
 }
 

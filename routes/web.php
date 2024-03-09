@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\organizer\OrganizerController;
+use App\Http\Controllers\SimpleQRcodeController;
 use App\Http\Controllers\StatisticController;
 use App\Models\bookings;
 
@@ -91,6 +92,8 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
     Route::get('/user/reservation/{id}', [EventsController::class, 'show'])->name('user.show');
     
+    Route::get("/simple-qrcode/{reservationId}", [SimpleQRcodeController::class, "generate"])->name('simple-qrcode');
+
 });
 
 require __DIR__.'/auth.php';
