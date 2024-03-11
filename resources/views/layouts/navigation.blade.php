@@ -18,16 +18,16 @@
                 </div>
                 @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                    <x-nav-link style="color: rgb(255, 255, 255);" :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
                         {{ __('Users') }}
                     </x-nav-link>
-                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                    <x-nav-link style="color: rgb(255, 255, 255);" :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
                         {{ __('Categories') }}
                     </x-nav-link>
-                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
+                    <x-nav-link style="color: rgb(255, 255, 255);" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
                         {{ __('Events') }}
                     </x-nav-link>
-                    <x-nav-link style="color: rgb(255, 255, 255);font-family: 'Times New Roman', Times, serif" :href="route('admin.admin')" :active="request()->routeIs('admin.admin')">
+                    <x-nav-link style="color: rgb(255, 255, 255);" :href="route('admin.admin')" :active="request()->routeIs('admin.admin')">
                         {{ __('statistics') }}
                     </x-nav-link>
                 </div>
@@ -51,7 +51,7 @@
                             <x-nav-link style="color: rgb(255, 60, 0); font-weight:bold; font-size: 1rem;"  :href="route('user.index')" :active="request()->routeIs('user.index')">
                                 {{ __('All events') }}
                             </x-nav-link>
-                            {{-- <x-nav-link style="color: rgb(197, 46, 0); font-weight:bold; font-size: 1rem;font-family: 'Times New Roman', Times, serif" >
+                            {{-- <x-nav-link style="color: rgb(197, 46, 0); font-weight:bold; font-size: 1rem;" >
                                 {{ __('tickets') }}
                             </x-nav-link> --}}
                             <x-nav-link style="color: rgb(255, 255, 255); font-weight:bold; font-size: 1rem;"  :href="route('user.myhistory')" :active="request()->routeIs('user.myhistory')">

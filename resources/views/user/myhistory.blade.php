@@ -28,7 +28,7 @@
 
     <div class="container " style="justify-content: space-between; display: flex; flex-wrap: wrap;">
         @if ($bookings->isEmpty())
-            <div class="card mt-5 mb-5 p-5 text-center shadow bg-white rounded md bg-white p-6 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+            <div class="alert alert-info text-center mt-5 mb-5 p-5 shadow bg-white rounded col-lg-8 col-16 ml-auto mr-auto">
                 <p class="alert alert-info">No bookings added yet.</p>
             </div>
             
@@ -41,7 +41,7 @@
                 {{ $booking->title }} 
             </p>
             <p class="card-text" style="font-family: 'Times New Roman', Times, serif">
-              Description:  {{ $booking->description}}
+              Description: {{ Str::limit($booking->description, 50)}}
             </p>
             <p class="card-text" style="font-family: 'Times New Roman', Times, serif">
               {{ $booking->date}}

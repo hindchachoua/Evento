@@ -23,7 +23,7 @@
     
 <body>
     @include('layouts.navigation')
-    <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
+    <div class="tab-pane fade show active" style="margin-bottom: 3%;" id="nav-ContactForm" role="tabpanel"
                                 aria-labelledby="nav-ContactForm-tab">
         <form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('events.store') }}" method="post"
                                     role="form">
@@ -60,6 +60,8 @@
                 </div>
             </form>
         </div>
+
+        @include('layouts.footer')
 
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

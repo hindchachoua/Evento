@@ -91,8 +91,11 @@
         <hr>
 
 		<div>
-			<h2>QR Code</h2>
-       			 {{ $qrcode }}
+			<h2 style="font-size: 20px; font-weight: bold; color: #d35100; margin-top: 5%;text-decoration: underline">QR Code</h2>
+			<div style="margin-left: 32%; margin-top: 5%;">
+				{{ $qrcode }}
+			</div>
+       			 
 		</div>
         
 

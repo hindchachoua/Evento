@@ -28,8 +28,8 @@
 
     <div class="container " style="justify-content: space-between; display: flex; flex-wrap: wrap;">
         @if ($bookings->isEmpty())
-            <div class="card mt-5 mb-5 p-5 text-center shadow bg-white rounded md bg-white p-6 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 ">
-                <p class="alert alert-info" style="font-family: 'Times New Roman', Times, serif">No bookings added yet.</p>
+            <div class="alert alert-info text-center mt-5 mb-5 p-5 shadow bg-white rounded col-lg-8 col-16 ml-auto mr-auto">
+                <p class="alert alert-info" >No bookings added yet.</p>
             </div>
             
         @endif
@@ -39,13 +39,11 @@
         <div class="card-group">
         <div class="card mb-3 mt-5 p-5 text-center shadow bg-white rounded md bg-white p-6 rounded-md shadow-md dark:bg-gray-800 dark:border-gray-700 ">
           
-          <div class="card-body">
-            {{-- <h5 class="card-title">{{ $booking->}} to {{ $booking->getEndCityNameAttribute }} </h5>
-            <p class="card-text"> --}}
+          <div class="card-body" style="font-size: 20px">
                 {{ $booking->title }} 
             </p>
             <p class="card-text" style="font-family: 'Times New Roman', Times, serif">
-              Your Name:  {{ $booking->description }}
+              Your Name:  {{ Str::limit($booking->description, 30)}}
             </p>
             <p class="card-text" style="font-family: 'Times New Roman', Times, serif"><a href="">
                 {{ $booking->status }}
@@ -64,7 +62,6 @@
                 <select name="status" id="status" onchange="this.form.submit()">
                 <option value="active" {{ ($booking->status == 'active') ? 'selected' : '' }}>{{ $booking->status }}</option>
                 <option value="canceled" {{ ($booking->status == 'canceled') ? 'selected' : '' }}>canceled</option>
-                {{-- <option value="valid" {{ ($booking->status == 'valid') ? 'selected' : '' }}>valid</option> --}}
 
                 </select>
             </form>

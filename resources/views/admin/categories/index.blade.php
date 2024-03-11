@@ -34,7 +34,8 @@
                         <thead>
                             <tr>
                                 <th>Name of category</th>
-                                <th>Action</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,16 +43,19 @@
                             <tr>
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                    <button type="button" class="btn" style="background-color: #ee5007 ; color: white"  >
+                                    <button type="button" class="btn" style="background-color: #ee5007 ; color: white; margin-bottom: 10px"  >
                                         <a href="{{ route('admin.categories.edit', $category->id)}}">Edit</a>
                                     </button>
+                                </td>
+                                <td>
                                     <form action="{{ route('categories.destroy', $category->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn" style="background-color: #ee5007 ; color: white"  >
-                                            Archive
+                                            Delete
                                         </button>
                                     </form>
+                                </td>
                                 </td>
                             </tr>
                         @endforeach

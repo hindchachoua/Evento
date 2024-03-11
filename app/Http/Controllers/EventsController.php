@@ -44,7 +44,7 @@ class EventsController extends Controller
         $event->isAuto = $request->has('isAuto') ? 1 : 0;
         $event->user_id = Auth::user()->id;
         $event->save();
-        return redirect('/dashboard');
+        return redirect('/or');
     }
 
     public function filtre(Request $request){

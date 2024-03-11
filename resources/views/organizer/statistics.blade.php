@@ -28,7 +28,7 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h3 class="card-title"><a href="">Categories</a></h3>
+                        <h3 class="card-title"><a href="">Your events :</a></h3>
                         <p class="card-text">Total Events:{{ $eventsCount }}
                             
                         </p>
@@ -38,7 +38,7 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h3 class="card-title"><a href="">Users</a></h3>
+                        <h3 class="card-title"><a href="">Reservations :</a></h3>
                         <p class="card-text">Total reservations: {{ $reservationsCount }}
                             
                         </p>

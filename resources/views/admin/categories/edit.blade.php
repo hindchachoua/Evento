@@ -30,6 +30,7 @@
             @method('PUT')
 
             <div>
+                <h1 class="text-center mt-5 mb-5" style="font-size: 50px; color: rgb(0, 0, 0); font-weight: bold">Edit " {{ $category->name }} ":</h1>
                 <label class="form-label" style="font-family: Georgia, serif;">Name</label>
                 <input class="form-control" type="text" name="name" placeholder="Name" value="{{ $category->name }}">
             </div>
