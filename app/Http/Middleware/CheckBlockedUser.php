@@ -22,7 +22,7 @@ class CheckBlockedUser
 
     if ($user && $user->is_blocked) {
         Auth::logout();
-        return redirect('/login')->with('error', 'Your account has been blocked. Please contact the administrator.');
+        return redirect('/login')->with('error', 'Your account has been blocked.');
     }
 
     return $next($request);

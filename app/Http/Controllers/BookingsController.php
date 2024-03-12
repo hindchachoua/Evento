@@ -41,10 +41,7 @@ class BookingsController extends Controller
             ]);
         }
         
-        // if($events->available_tickets <= 0){
-        //     return redirect()->back()->with('error', 'No tickets available');
-        // }
-
+        
         $input = $request->input('num_people');
 
         if($input > $events->available_tickets){
@@ -63,13 +60,12 @@ class BookingsController extends Controller
 
     public function reservations()
     {
-        // Assuming you have an authenticated user
+
         $user = Auth::user();
     
-        // Retrieve the events associated with the organizer
+
         $organizerEvents = events::where('user_id', $user->id)->pluck('id');
     
-        // Retrieve bookings for the organizer's events
         $bookings = bookings::join('events', 'bookings.event_id', '=', 'events.id')
             ->where('events.isAuto', 0)
             ->whereIn('events.id', $organizerEvents)

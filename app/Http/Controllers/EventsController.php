@@ -40,8 +40,7 @@ class EventsController extends Controller
         $event->location = $request->location;
         $event->available_tickets = $request->available_tickets;
         $event->category_id = $request->category_id;
-        $event->isAuto = $request->isAuto;
-        $event->isAuto = $request->has('isAuto') ? 1 : 0;
+        $event->isAuto = $request->has('isAuto') ? 0 : 1;
         $event->user_id = Auth::user()->id;
         $event->save();
         return redirect('/or');
@@ -108,7 +107,7 @@ class EventsController extends Controller
     $event->location = $request->location;
     $event->available_tickets = $request->available_tickets;
     $event->category_id = $request->category_id;
-    $event->isAuto = $request->has('isAuto') ? 1 : 0;
+    $event->isAuto = $request->has('isAuto') ? 0 : 1;
     $event->user_id = Auth::user()->id;
     $event->save();
 

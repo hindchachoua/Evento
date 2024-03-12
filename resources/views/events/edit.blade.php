@@ -48,7 +48,7 @@
 
                 <input name="available_tickets" class="form-control" id="available_tickets" value="{{ $event->available_tickets }}" placeholder="Number of places"></input>
                 <h1>category: {{ $event->category->name }}</h1>
-                <h1>validation: @if($event->isAuto) Manulle @else Auto @endif</h1>
+                <h1>validation: @if($event->isAuto == 0) Manulle @else Auto @endif</h1>
                 <br>
                 <input type="checkbox" name="isAuto" id="isAuto" value="0">
                 <label for="isAuto">Manulle</label>
